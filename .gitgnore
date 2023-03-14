@@ -1,6 +1,0 @@
-.vscode
-node_modules/
-.env
-.env.ts
-src/database/*
-/src/database/*
