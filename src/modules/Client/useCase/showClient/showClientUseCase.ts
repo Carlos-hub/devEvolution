@@ -1,4 +1,4 @@
-import { Client } from "../../ModelClient/ClientModel";
+import { Client } from "../../Model/ClientModel";
 
 interface IShowClient{
  id: string;
