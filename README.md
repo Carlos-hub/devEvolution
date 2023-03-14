@@ -85,6 +85,9 @@
 `2. Deve ser possível criar pedidos apenas depois de selecionar um ou mais produtos`
 `3. Deve ser possível retirar produtos`
 `4. Deve ser possível inserir produtos`
+`5. Deve ser possível criar pedidos apenas se o usuário tiver um ou mais endereços`
+`6. A cada pedido criado é necessário verificar se o usuário existe`
+`7. a cada pedido criado é necessário atribuir o id do pedido ao history order do cliente que efetuou o pedido`
 #### Editar Pedido
 `1. Deve ser possível editar o pedidos apenas autenticado`
 `2. Deve ser possível editar produtos apenas que estão com status pendente ou confirmado`

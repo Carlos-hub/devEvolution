@@ -10,7 +10,7 @@ export class AuthenticateClientController{
    console.log(email,senha,"no controller")
    const token = await authenticateCLientUSeCase.execute(email,senha);
   return response.status(200).json(token)
-  }catch(err:Error){
+  }catch(err:any){
    console.log(err)
    return response.status(400).json(err.message)
   }

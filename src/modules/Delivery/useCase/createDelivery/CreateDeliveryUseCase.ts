@@ -1,45 +1,28 @@
-import {Client} from '../../Model/ClientModel';
-import {ICreateClientDTO}from '../../DTO/IClient'
-import {hash} from 'bcrypt';
+import { Delivery } from '../../Model/DeliveryModel';
+import { ICreateDeliveryDTO } from '../../DTO/IDelivery';
 
 export class CreateClientUseCase{
-  async execute({
-   name,
-   age,
-   adress,
-   cpf,
-   paymentMethod,
-   email,
-   password,
-   bornDate,
-   orderHistory,
-   avatar,
-  }:ICreateClientDTO){
-     if(email ==""){
-      return new Error("Invalid Email")
-     }
-     const existEmail = await Client.findOne({email: email})
-     console.log(existEmail?.email);
-     const hashPassword = await hash(password,10)
-     if(existEmail?.email){
-      throw new Error("Invalid Email already in use")
-     }
-        const newClient = new Client({
-         name,
-         age,
-         cpf,
-         adress,
-         paymentMethod,
-         email,
-         password:hashPassword,
-         bornDate,
-         orderHistory,
-         avatar
-        });
-        newClient.save()
-        .then(() => {return "Cliente criado com sucesso"} )
-        .catch((err) => console.log(err))
-        return existEmail?.email;
-
+  
+  gerarProtocolo(): string {
+      let ultimoNumeroGerado:number = 0;
+      let ultimoDiaGerado = '';
+      let dataAtual = new Date();
+      let diaDoAno = (Math.ceil((dataAtual.getTime() - new Date(dataAtual.getFullYear(), 0, 1).getTime()) / 86400000)).toString().padStart(3, '0');
+      let ano = dataAtual.getFullYear().toString();
+      let dataFormatada = ano + diaDoAno;
+      
+      if (dataFormatada !== ultimoDiaGerado) {
+        ultimoNumeroGerado = 0;
+        ultimoDiaGerado = dataFormatada;
+      }
+      
+      const numeroAleatorio = (++ultimoNumeroGerado).toString().padStart(6, '0');
+      
+      return `FM${dataFormatada}${numeroAleatorio}`;
   }
+
+  async execute({
+  }:ICreateDeliveryDTO){
+
+}
 }
