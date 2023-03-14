@@ -33,7 +33,7 @@ const deliverySchema = new mongoose.Schema({
   require: true
  },
  codDelivery:{
-  type: Array,
+  type: String,
   require:false
  },
  telphone:{
