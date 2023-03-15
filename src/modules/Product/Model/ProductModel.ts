@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { now } from "mongoose";
 
 
 const productSchema = new mongoose.Schema({
@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema({
  },
  created_at:{
   type:Date,
-  require: false
+  require: false,
+  default:now()
  },
  price:{
   type: String,

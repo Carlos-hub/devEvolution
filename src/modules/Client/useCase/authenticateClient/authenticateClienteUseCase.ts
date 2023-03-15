@@ -4,7 +4,7 @@ import { compare } from "bcrypt";
 export class AuthenticateClientUseCase{
   async execute(email:string,senha:any){
    const exist = await Client.findOne({email})
-   console.log(exist)
+  //  console.log(exist)
 
    if(!exist){
     console.log("caiu aqui")

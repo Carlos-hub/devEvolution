@@ -1,11 +1,7 @@
 import { Client } from "../../Model/ClientModel";
 
-interface IShowClient{
- id: string;
-}
-
 export class ShowClientUseCase{
- async execute(id:IShowClient ){
+ async execute(id:string | any ){
    const user = await Client.findById(id).exec();
    return user;
  }

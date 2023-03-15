@@ -1,11 +1,14 @@
 import { Request,Response } from "express";
 import { EditClientUseCase } from "./EditClientUseCase";
+import { decode } from "jsonwebtoken";
 
 export class EditClientController{
  async handle(request:Request,response:Response){
+  const token = request.headers.authorization?.split(' ')[1];
+  const findId:any = decode(token ?? '',{complete:true})
   const editCLientUseCase= new EditClientUseCase();
    try{
-   const edit = await editCLientUseCase.execute(request.params.id,request.body);
+   const edit = await editCLientUseCase.execute(findId?.payload.sub,request.body);
    return response.status(200).json(edit)
    }catch(error:any){
     if (error.name === 'CastError') {
