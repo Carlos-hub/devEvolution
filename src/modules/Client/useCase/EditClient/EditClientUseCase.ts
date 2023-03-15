@@ -4,8 +4,10 @@ import {hash} from 'bcrypt';
 
 export class EditClientUseCase{
   async execute(id:string,body:object){
-
-    const exist = await Client.findById(id).exec();
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+    const exist = await Client.findById(id)
     if(exist){
       await Client.updateOne({_id: id},{$set: body})
       return "User updated"
