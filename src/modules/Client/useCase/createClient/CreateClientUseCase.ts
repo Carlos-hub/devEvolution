@@ -6,8 +6,8 @@ export class CreateClientUseCase{
   async execute({
    name,
    age,
-   adress,
    cpf,
+   adress,
    paymentMethod,
    email,
    password,
