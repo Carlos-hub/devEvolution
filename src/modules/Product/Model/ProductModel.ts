@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
  created_at:{
   type:Date,
   require: false,
-  default:now()
+  timestamps:true
  },
  price:{
   type: String,

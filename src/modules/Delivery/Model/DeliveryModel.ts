@@ -14,14 +14,16 @@ const deliverySchema = new mongoose.Schema({
  },
  created_at:{
   type:Date,
-  require: false
+  require: false,
+  timestamp:true
  },
  paymentMethod:{
   type: Object,
   require:true
  },
- deliveryAdress:{
-  type:Object,
+ deliveryAddress:{
+  type:mongoose.Schema.Types.ObjectId,
+  ref: 'Client.endereco._id',
   require:true,
  },
  status:{
@@ -29,25 +31,27 @@ const deliverySchema = new mongoose.Schema({
   require: true
  },
  product:{
-  type: [productSchema],
+  type: [mongoose.Schema.Types.ObjectId],
+  ref:'product',
   require: true
  },
  codDelivery:{
   type: String,
-  require:false
+  require:true
  },
  telphone:{
   type: String,
   require: true
  },
  orderPay:{
-  type: Float32Array,
+  type: mongoose.Types.Decimal128,
   require:true
  },
  clientId:{
-  type: mongoose.Schema.Types.ObjectId, ref:'clients'
+  type: mongoose.Schema.Types.ObjectId, ref:'clients',
+  require: true
  },
- deliveryMan:{
+ deliveryMen:{
   type: String,
   require: true
  }

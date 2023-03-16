@@ -4,7 +4,7 @@ import { EditClientController } from "../modules/Client/useCase/EditClient/EditC
 import { ShowClientController } from "../modules/Client/useCase/showClient/showClientController";
 import { DeleteClientController } from "../modules/Client/useCase/deleteClient/DeleteClientController";
 import { AuthenticateClientController } from "../modules/Client/useCase/authenticateClient/authenticateClienteController";
-import { UpdateAddressController } from "../modules/Client/useCase/updateAddress/updateAddressClienteController";
+import { UpdateAddressController } from "../modules/Client/useCase/removeAddress/updateAddressClienteController";
 import { isAuthenticate } from "../middleware/isAuthenticate";
 import { DeleteClientAddressController } from "../modules/Client/useCase/deleteAddress/deleteClientAddressController";
 

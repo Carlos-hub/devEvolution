@@ -1,38 +1,25 @@
 import { Request,Response } from "express";
-import { CreateClientUseCase } from "./CreateClientUseCase";
+import { CreateDeliveryUseCase } from "./CreateDeliveryUseCase";
+import { decode } from "jsonwebtoken";
 
-export class CreateClientController{
+export class CreateDeliveryController{
  async handle(request:Request,response:Response){
-  const createClientUseCase = new CreateClientUseCase();
   const {
-   name,
-   age,
-   adress,
-   cpf,
-   paymentMethod,
-   email,
-   password,
-   bornDate,
-   orderHistory,
-   avatar,
-  } = request.body
+   product,
+   deliveryAddress
+  } = request.body;
+  const createDeliveryUseCase = new CreateDeliveryUseCase();
+  const token = request.headers.authorization?.split(' ')[1];
+  const findId:any = await decode(token ?? '',{complete:true})
   try{
-   const createClient = await createClientUseCase.execute({
-    name,
-    age,
-    cpf,
-    adress,
-    paymentMethod,
-    email,
-    password,
-    bornDate,
-    orderHistory,
-    avatar,
-   });
-   return response.status(201).json(createClient);
-  } catch(err:any | Error){
-   console.log(err)
-   return response.status(400).json("Email already in use")
+   const createDelivery = await createDeliveryUseCase.execute(
+    findId.payload.sub,
+    product,
+    deliveryAddress)
+   return response.status(201).json(createDelivery)
+  }catch(err){
+   console.log(err);
+   return response.status(400).json(err);
   }
-  }
+ }
 }

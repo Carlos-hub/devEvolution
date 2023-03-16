@@ -49,7 +49,7 @@ const clientSchema = new mongoose.Schema({
   type: Array,
   require:false
  },
- telphone:{
+ phone:{
   type: String,
   require: true
  },

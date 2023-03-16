@@ -9,8 +9,8 @@ export class DeleteClientAddressController{
   const findId:any = decode(token ?? '',{complete:true})
   const idParam = request.params;
   try{
-   const address = deleteAddress.execute(findId.payload.sub,idParam);
-   return response.status(200).json(address)
+   const address = await deleteAddress.execute(findId.payload.sub,idParam);
+   return response.status(200).json(address);
   }catch(err){
    return response.status(400).json(err);
   }

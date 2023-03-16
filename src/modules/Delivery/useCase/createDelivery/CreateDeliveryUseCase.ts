@@ -1,31 +1,86 @@
+import mongoose, { Document, ObjectId } from 'mongoose';
 import { Delivery } from '../../Model/DeliveryModel';
-import { ICreateDeliveryDTO } from '../../DTO/IDelivery';
+import { Client } from '../../../Client/Model/ClientModel';
+import { ICreateClientDTO } from '../../../Client/DTO/IClient';
+interface Client extends Document {
+  orderPay: any;
+  paymentMethod: any;
+  deliveryAddress: any;
+  telphone: any;
+  _id: string;
+  address: Array<object>;
+}
 
+interface Delivery extends Document {
+  codDelivery: string | undefined;
+  paymentMethod: string;
+  deliveryAddress: string;
+  product: string;
+  telphone: string;
+  orderPay: number;
+  clientId: string;
+  deliveryMen: string;
+}
 
-// gerarProtocolo(): string {
-//   let ultimoNumeroGerado:number = 0;
-//   let ultimoDiaGerado = '';
-//   let dataAtual = new Date();
-//   let diaDoAno = (Math.ceil((dataAtual.getTime() - new Date(dataAtual.getFullYear(), 0, 1).getTime()) / 86400000)).toString().padStart(3, '0');
-//   let ano = dataAtual.getFullYear().toString();
-//   let dataFormatada = ano + diaDoAno;
+export class CreateDeliveryUseCase {
+  async execute(
+    clientId:string,
+    product: Array<string>,
+    deliveryAddress:string | ObjectId | undefined
+  ): Promise<object | undefined> {
+    // Verifica se o campo product é inválido ou vazio
+    console.log(clientId, product, deliveryAddress)
+    if (!product || product.length === 0) {
+      throw new Error('Insira um produto para continuar o pedido');
+    }
+
+    // Verifica se o deliveryAddress existe na collection de clientes
+    const clientExist:any | ICreateClientDTO = await Client.findOne({ _id: clientId})
+  .then(cliente => {
+    console.log(cliente)
+    if (!cliente) {
+      // cliente não encontrado
+      console.error('Cliente não encontrado');
+      return;
+    }
+
+    const endereco = cliente.endereco.find(e => e._id == deliveryAddress);
+    if (!endereco) {
+      // endereço não encontrado
+      console.error('Endereço não encontrado');
+      return;
+    }
+
+    // endereço encontrado - continue com o processamento do pedido aqui
+  })
+  .catch(err => {
+    // erro ao buscar cliente ou endereço
+    console.error(err);
+  });
+
+    // Gera um código único para o pedido
+    const year: number = new Date().getFullYear();
+    const dayOfYear: number = new Date().getDate();
+    const lastDelivery: Delivery | null | any = await Delivery.findOne().sort('-codDelivery')
+    .then(result => {return result})
+    const lastNumber: number = lastDelivery ? parseInt(lastDelivery.codDelivery.split('/')[2]) : 0;
+    const newNumber: number = lastNumber + 1;
+    const newCodDelivery: string = `DevE${year}${dayOfYear.toString().padStart(3, '0')}${newNumber.toString().padStart(4, '0')}`;
+
+    // Cria o novo pedido
+    if(clientExist){
+      const delivery = new Delivery({
+        codDelivery: newCodDelivery,
+        paymentMethod:clientExist?.paymentMethod,
+        deliveryAddress:clientExist.deliveryAddress,
+        product,
+        telphone:clientExist.telphone,
+        orderPay:clientExist.orderPay,
+        clientId
+      });
+      return delivery;
+    }
+    return Error("Verifique os valores inseridos")
   
-//   if (dataFormatada !== ultimoDiaGerado) {
-//     ultimoNumeroGerado = 0;
-//     ultimoDiaGerado = dataFormatada;
-//   }
-  
-//   const numeroAleatorio = (++ultimoNumeroGerado).toString().padStart(6, '0');
-  
-//   return `FM${dataFormatada}${numeroAleatorio}`;
-// }
-
-
-export class CreateClientUseCase{
-  
-
-  async execute({
-  }:ICreateDeliveryDTO){
-
 }
 }
