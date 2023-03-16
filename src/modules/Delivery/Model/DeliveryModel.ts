@@ -18,7 +18,8 @@ const deliverySchema = new mongoose.Schema({
   timestamp:true
  },
  paymentMethod:{
-  type: Object,
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Client.paymentMethod._id',
   require:true
  },
  deliveryAddress:{

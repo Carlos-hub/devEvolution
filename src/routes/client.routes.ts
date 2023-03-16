@@ -7,6 +7,7 @@ import { AuthenticateClientController } from "../modules/Client/useCase/authenti
 import { UpdateAddressController } from "../modules/Client/useCase/removeAddress/updateAddressClienteController";
 import { isAuthenticate } from "../middleware/isAuthenticate";
 import { DeleteClientAddressController } from "../modules/Client/useCase/deleteAddress/deleteClientAddressController";
+import { ShowDeliveryClientController } from "../modules/Delivery/useCase/showDeliveryClient/showDeliveryController";
 
 const createClientController = new CreateClientController();
 const editClientController = new EditClientController();
@@ -16,6 +17,7 @@ const updateAddres = new UpdateAddressController();
 const deleteAddress = new DeleteClientAddressController();
 const clientRoutes = express.Router();
 const authClient = new AuthenticateClientController();
+const showDeliveryClient = new ShowDeliveryClientController();
 
 clientRoutes.get('/',(request:Request,response:Response) =>{
  response.json("All Right baby")
@@ -27,6 +29,7 @@ clientRoutes.delete('/delete/:id',isAuthenticate,deleteClientController.handle)
 clientRoutes.post('/auth',authClient.handle);
 clientRoutes.post('/address',updateAddres.handle)
 clientRoutes.get('/address/delete/:id',deleteAddress.handle)
+clientRoutes.get('/delivery', showDeliveryClient.handle)
 
 
 export {clientRoutes}

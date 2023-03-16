@@ -37,11 +37,11 @@ export class CreateDeliveryUseCase {
     // Verifica se o deliveryAddress existe na collection de clientes
     const clientExist:any | ICreateClientDTO = await Client.findOne({ _id: clientId})
   .then(cliente => {
-    console.log(cliente)
+    // console.log(cliente)
     if (!cliente) {
       // cliente não encontrado
       console.error('Cliente não encontrado');
-      return;
+      return Error("Cliente não encontrado")
     }
 
     const endereco = cliente.endereco.find(e => e._id == deliveryAddress);
@@ -51,16 +51,18 @@ export class CreateDeliveryUseCase {
       return;
     }
 
-    // endereço encontrado - continue com o processamento do pedido aqui
+    return cliente;
   })
   .catch(err => {
     // erro ao buscar cliente ou endereço
     console.error(err);
+    return Error(err)
   });
+  console.log(await clientExist)
 
     // Gera um código único para o pedido
     const year: number = new Date().getFullYear();
-    const dayOfYear: number = new Date().getDate();
+    const dayOfYear: number = new Date().getDay();
     const lastDelivery: Delivery | null | any = await Delivery.findOne().sort('-codDelivery')
     .then(result => {return result})
     const lastNumber: number = lastDelivery ? parseInt(lastDelivery.codDelivery.split('/')[2]) : 0;
@@ -78,6 +80,7 @@ export class CreateDeliveryUseCase {
         orderPay:clientExist.orderPay,
         clientId
       });
+      await delivery.save();
       return delivery;
     }
     return Error("Verifique os valores inseridos")
