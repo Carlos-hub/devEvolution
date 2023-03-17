@@ -1,4 +1,4 @@
-import mongoose, { now } from "mongoose";
+import mongoose, { mongo, now } from "mongoose";
 
 
 const productSchema = new mongoose.Schema({
@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   timestamps:true
  },
  price:{
-  type: String,
+  type: mongoose.Schema.Types.Decimal128,
   require:true
  },
  status:{

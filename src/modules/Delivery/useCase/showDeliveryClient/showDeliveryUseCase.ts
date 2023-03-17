@@ -5,7 +5,7 @@ export class ShowDeliveryUseCase{
   try{
     const delivery:any = await Delivery.find({clientId: id})
     .populate('product')
-    .populate({path: 'clientId', model:'Client'});
+    .populate({path: 'clientId', model:'Client',select:'name'});
     console.log(delivery)
     return delivery;
   }catch(err){

@@ -1,6 +1,7 @@
 import mongoose, { Document, ObjectId } from 'mongoose';
 import { Delivery } from '../../Model/DeliveryModel';
 import { Client } from '../../../Client/Model/ClientModel';
+import { Product } from '../../../Product/Model/ProductModel';
 import { ICreateClientDTO } from '../../../Client/DTO/IClient';
 interface Client extends Document {
   orderPay: any;
@@ -29,7 +30,7 @@ export class CreateDeliveryUseCase {
     deliveryAddress:string | ObjectId | undefined
   ): Promise<object | undefined> {
     // Verifica se o campo product é inválido ou vazio
-    console.log(clientId, product, deliveryAddress)
+    // console.log(clientId, product, deliveryAddress)
     if (!product || product.length === 0) {
       throw new Error('Insira um produto para continuar o pedido');
     }
@@ -58,7 +59,40 @@ export class CreateDeliveryUseCase {
     console.error(err);
     return Error(err)
   });
-  console.log(await clientExist)
+
+  // Product
+
+
+  const findProduct:number[] = await Product.find({'_id':{$in:product}})
+  .select('price')
+  .then(resultados => {
+    const pricesArray = resultados.map(objeto => parseFloat(String(objeto.price)));
+    return pricesArray;
+    // console.log(pricesArray); // Exibe um array com os preços de todos os produtos
+  })
+  .catch(err => {
+    console.error(err);
+    return err;
+  });
+  console.log( await findProduct);
+  
+  const sumOrder = (findProduct:Array<number>):number | void =>{
+    let total = 0;
+    const sum = findProduct.forEach((element)=> {
+      // console.log(element + " no foreach")
+      total+= element;
+      // console.log(element + " depois do foreach")
+    });
+    return total;
+  }
+
+  // console.log( sumOrder(findProduct))
+
+
+
+
+
+  // console.log(await clientExist)
 
     // Gera um código único para o pedido
     const year: number = new Date().getFullYear();
@@ -69,15 +103,18 @@ export class CreateDeliveryUseCase {
     const newNumber: number = lastNumber + 1;
     const newCodDelivery: string = `DevE${year}${dayOfYear.toString().padStart(3, '0')}${newNumber.toString().padStart(4, '0')}`;
 
+    // Faz a soma do pedido
+
+
     // Cria o novo pedido
     if(clientExist){
       const delivery = new Delivery({
         codDelivery: newCodDelivery,
-        paymentMethod:clientExist?.paymentMethod,
+        // paymentMethod:clientExist?.paymentMethod,
         deliveryAddress:clientExist.deliveryAddress,
         product,
         telphone:clientExist.telphone,
-        orderPay:clientExist.orderPay,
+        orderPay:sumOrder(findProduct),
         clientId
       });
       await delivery.save();
@@ -87,3 +124,6 @@ export class CreateDeliveryUseCase {
   
 }
 }
+
+
+
