@@ -74,7 +74,7 @@ export class CreateDeliveryUseCase {
     console.error(err);
     return err;
   });
-  console.log( await findProduct);
+  // console.log( await findProduct);
   
   const sumOrder = (findProduct:Array<number>):number | void =>{
     let total = 0;
