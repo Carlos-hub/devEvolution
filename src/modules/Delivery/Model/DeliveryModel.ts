@@ -49,7 +49,7 @@ const deliverySchema = new mongoose.Schema({
   require:true
  },
  clientId:{
-  type: mongoose.Schema.Types.ObjectId, ref:'clients',
+  type: mongoose.Schema.Types.ObjectId, ref:'client',
   require: true
  },
  deliveryMen:{
