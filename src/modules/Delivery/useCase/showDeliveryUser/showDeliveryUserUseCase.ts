@@ -9,7 +9,7 @@ export class ShowDeliveryUserUseCase{
     if(!userExist){
       return Error("Usuário não existe")
     }
-    const delivery:any = await Delivery.find({_id: id})
+    const delivery:any = await Delivery.find()
     .populate('product')
     .populate({path: 'clientId', model:'Client',select:'name'});
     return delivery;

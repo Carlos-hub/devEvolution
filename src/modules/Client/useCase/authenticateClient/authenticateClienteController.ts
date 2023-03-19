@@ -7,7 +7,7 @@ export class AuthenticateClientController{
   const authenticateCLientUSeCase = new AuthenticateClientUseCase(); 
   const {email,senha} = request.body;
   try{
-   console.log(email,senha,"no controller")
+   // console.log(email,senha,"no controller")
    const token = await authenticateCLientUSeCase.execute(email,senha);
   return response.status(200).json(token)
   }catch(err:any){

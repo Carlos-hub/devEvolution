@@ -49,12 +49,12 @@ export class CreateDeliveryUseCase {
     if (!endereco) {
       // endereço não encontrado
       console.error('Endereço não encontrado');
-      return;
+      return Error("Endereço não encontrado")
     }
 
     return cliente;
   })
-  .catch(err => {
+  .catch((err: string | undefined) => {
     // erro ao buscar cliente ou endereço
     console.error(err);
     return Error(err)
@@ -107,15 +107,15 @@ export class CreateDeliveryUseCase {
 
 
     // Cria o novo pedido
-    if(clientExist){
+    if(clientExist && clientExist.endereco.length !== 0){
       const delivery = new Delivery({
         codDelivery: newCodDelivery,
-        // paymentMethod:clientExist?.paymentMethod,
         deliveryAddress:clientExist.deliveryAddress,
         product,
         telphone:clientExist.telphone,
         orderPay:sumOrder(findProduct),
-        clientId
+        clientId,
+        status:'confirmado'
       });
       await delivery.save();
       return delivery;
