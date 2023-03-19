@@ -1,9 +1,8 @@
 import {Request,Response} from 'express';
-import { ShowUserUseCase } from './showClientUseCase';
-import { ObjectId } from 'mongoose';
+import { ShowUserUseCase } from './showUserUseCase';
 import { decode } from 'jsonwebtoken';
 
-export class ShowClientController{
+export class ShowUserController{
  async handle(request:Request,response:Response){
   const showUserUseCase = new ShowUserUseCase(); 
   const token = request.headers.authorization?.split(' ')[1];
