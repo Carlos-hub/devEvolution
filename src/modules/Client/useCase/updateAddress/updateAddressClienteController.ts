@@ -15,17 +15,5 @@ export class UpdateAddressController{
    return response.status(401).json(err)
   }
 
- //  try {
- //   const result = await Client.updateOne(
- //     { _id: userId },
- //     { $pull: { address: { _id: idRemove } } }
- //   ).exec();
- //   console.log(result);
- //   return result;
- // } catch (err) {
- //   console.log(err);
- //   return err;
- // }
-
  }
 }

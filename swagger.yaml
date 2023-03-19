@@ -1,743 +1,417 @@
-openapi: 3.0.0
+swagger: '2.0'
 info:
-  title: API de Produtos e pedidos
-  description: Criação de uma API de pedidos e produtos para apresenar ao d
-  version: 0.1.9
-servers:
-  - url: https://<HOST>/api-module/
-    description: Base URL
+  version: 1.0.0
+  title: Projeto API de Produtos/Pedidos de um delivery 
+securityDefinitions:
+  Token:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
-  /auth/cliente/login-by-email:
+  /client/create:
     post:
-      summary: Autenticação
-      description: Rota de autenticação do cliente na central do assinante por login e senha
+      tags:
+        - Client
+      summary: Cria um novo cliente
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Informações do cliente a ser criado
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              age:
+                type: number
+              cpf:
+                type: string
+              address:
+                type: object
+                properties:
+                  street:
+                    type: string
+                  city:
+                    type: string
+                  state:
+                    type: string
+                  country:
+                    type: string
+                  zipCode:
+                    type: string
+              paymentMethod:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  number:
+                    type: string
+                  name:
+                    type: string
+                  expirationDate:
+                    type: string
+                  cvv:
+                    type: string
+              email:
+                type: string
+              password:
+                type: string
+              bornDate:
+                type: string
+                format: date
+              orderHistory:
+                type: array
+                items:
+                  type: string
+              avatar:
+                type: string
+      responses:
+        201:
+          description: Cliente criado com sucesso
+        400:
+          description: Parâmetros inválidos
+        500:
+          description: Erro interno no servidor
+  /client/auth: 
+    post:
+      tags:
+        - Client
+      summary: Autentica um cliente existente
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Informações de login do cliente
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Cliente autenticado com sucesso
+        400:
+          description: Parâmetros inválidos
+        401:
+          description: Credenciais inválidas
+        500:
+          description: Erro interno no servidor
+  /client/edit:
+    put:
+      tags:
+        - Client
+      summary: Edita um cliente existente
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Informações do cliente a serem editadas
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              age:
+                type: number
+              cpf:
+                type: string
+              adress:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                    houseNumber:
+                      type: string
+                    city:
+                      type: string
+                    district:
+                      type: string
+                    landMark:
+                      type: string
+              paymentMethod:
+                type: array
+                items: {}
+              email:
+                type: string
+              password:
+                type: string
+              bornDate:
+                type: string
+                format: date-time
+              orderHistory:
+                type: object
+              avatar:
+                type: string
+      security:
+        - Token: []
+      responses:
+        200:
+          description: Cliente editado com sucesso
+        400:
+          description: Parâmetros inválidos
+        500:
+          description: Erro interno no servidor
+  /client/show:
+    get:
+      tags:
+        - Client
+      summary: Retorna informações de um cliente
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Token de autenticação JWT
+          required: true
+          type: string
+      security:
+        - Token: []
+      responses:
+        200:
+          description: Informações do cliente
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              age:
+                type: number
+              cpf:
+                type: string
+              adress:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                    houseNumber:
+                      type: string
+                    city:
+                      type: string
+                    district:
+                      type: string
+                    landMark:
+                      type: string
+              paymentMethod:
+                type: array
+                items: {}
+              email:
+                type: string
+              bornDate:
+                type: string
+                format: date-time
+              orderHistory:
+                type: object
+              avatar:
+                type: string
+        401:
+          description: Autenticação inválida ou não fornecida
+        500:
+          description: Erro interno no servidor
+  /client/delete/{id}:
+    delete:
+      tags:
+        - Client
+      summary: Exclui um cliente pelo ID
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: ID do cliente a ser excluído
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Token de autenticação JWT
+          required: true
+          type: string
+      security:
+        - Token: []
+      responses:
+        204:
+          description: Cliente excluído com sucesso
+        401:
+          description: Autenticação inválida ou não fornecida
+        404:
+          description: Cliente não encontrado
+        500:
+          description: Erro interno no servidor
+  /client/address:
+    post:
+      tags:
+        - Client
+      summary: Cria um novo endereço para o cliente atual
+      security:
+        - JWT: []
+      parameters: []
       requestBody:
+        description: Objeto JSON contendo os dados do endereço
         required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                login:
+                street:
                   type: string
-                senha:
+                  example: Getulio Vargas
+                houseNumber:
                   type: string
-              example: 
-                login: teste@email.com
-                senha: testesenha123
+                  example: 22
+                city:
+                  type: string
+                  example: chapeco
+                district:
+                  type: string
+                  example: Centro
+                landmark:
+                  type: string
+                  example: casa branca
+              required:
+                - street
+                - houseNumber
+                - city
+                - district
+                - landmark
+      responses:
+        '201':
+          description: Endereço criado com sucesso
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Endereço criado com sucesso
+        '400':
+          description: Dados inválidos enviados na requisição
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Dados inválidos enviados na requisição
+        '401':
+          description: Não autorizado
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Não autorizado
+        '500':
+          description: Erro interno do servidor
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Erro interno do servidor
+  /client/address/delete/{id}:
+    post:
+      tags:
+        - Client
+      summary: Deletar endereço do cliente
+      description: Deleta um endereço do cliente pelo seu ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do endereço a ser deletado
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
       responses:
         '200':
-          summary: Autenticação por Login e Senha
-          description: Retorna um objeto JSON com um objeto com duas propriedades, token e o expireIn
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MjgxODY1OTQsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTYyODE4NjU5NCwiZXhwIjoxNjI4MTg3MTk0LCJpZCI6IjIiLCJjbGFzcyI6ImNsaWVudGUiLCJjaGF2ZSI6IklYQzkyLTA1MTZlLWNjMjAxLTA2NTk2In0.hYd2V8yP8ZxuxrTGr8BpEzcG2sFA2tPpx4Mr6yotdmNCi6RgEYb0WZYih9caK0pdDUPNFwcRvrk3HA8mHDrKHQ
-                  expireIn:
-                    type: string
-                    example: '1628187194'
-        '400':
-          description: Acontece quando um token que já expirou é enviado para uma rota autenticada.
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Login ou senha inválidos
-                  code: 
-                    type: integer
-                    example: 401
-                  classException:
-                    type: string
-                    example: Exception
-  /auth/cliente/login-by-cnpj-cpf:
-    post:
-      summary: Autenticação por CPF e senha
-      description: Permite que um token JWT seja gerado e entregue a partir de um cliente com CPF ou CNPJ e senha, que esteja cadastrado no registro de clientes.
+          description: Endereço deletado com sucesso
+        '401':
+          description: Não autorizado
+        '404':
+          description: Endereço não encontrado
+  /client/delivery:
+    get:
+      tags:
+        - Client
+      summary: Solicitar entrega
+      description: Solicita uma entrega para o endereço do cliente
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Token de autenticação
       requestBody:
+        description: Dados do pedido e endereço de entrega
         required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                cnpj_cpf:
-                  type: string
-                senha:
-                  type: string
-              example:
-                cnpj_cpf: 503.944.570-99
-                senha: senha123
-      responses:
-      '200': 
-        summary: Login por CPF/CNPJ e senha
-        description: Retorna um Token JWT necessário para a autenticação de clientes cadastrados e também um ExpireIn que é um TimeStamp que identifica o momento que o token vai expirar
-         content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MjgxODY1OTQsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTYyODE4NjU5NCwiZXhwIjoxNjI4MTg3MTk0LCJpZCI6IjIiLCJjbGFzcyI6ImNsaWVudGUiLCJjaGF2ZSI6IklYQzkyLTA1MTZlLWNjMjAxLTA2NTk2In0.hYd2V8yP8ZxuxrTGr8BpEzcG2sFA2tPpx4Mr6yotdmNCi6RgEYb0WZYih9caK0pdDUPNFwcRvrk3HA8mHDrKHQ
-                  expireIn:
-                    type: string
-                    example: '1628187194'
-      '401': 
-        description: Acontece quando as informações enviadas não encontram um registro no banco de dados da aplicação
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Login ou senha inválidos
-                  code:
-                    type: integer
-                    example: 401
-                  classException:
-                    type: string
-                    example: Exception
-      '400': 
-        description: Acontece quando muitas tentativas com login e senha inválidos são efetuados. Quando este erro acontece é necessário aguardar um tempo para que seja possível efetuar outra tentiva de login.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Muitas tentativas falhas com login 000.000.000-00! Aguarde X minuto e X segundos e faça uma nova tentativa!
-                  code:
-                    type: integer
-                    example: 401
-                  classException:
-                    type: string
-                    example: IXCProvedorPack\\Auth\\Security\\Exceptions\\ProtectForceAuthException
-  /auth/cliente/renew-token:
-    post:
-      summary: Renovação de token
-      description: Rota de revonação de token
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                senha:
-                  type: string
-                cnpj_cpf:
-                  type: string
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                        description: ID do produto
+                      quantity:
+                        type: integer
+                        description: Quantidade do produto
+                      unitPrice:
+                        type: number
+                        description: Preço unitário do produto
+                deliveryAddress:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                      description: Nome da rua
+                    houseNumber:
+                      type: string
+                      description: Número da casa
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    landmark:
+                      type: string
+                      description: Ponto de referência
+              required:
+                - items
+                - deliveryAddress
       responses:
         '200':
-          summary: Renew Token
-          description: Retorna um objeto JSON com um objeto com duas propriedades, token e o expireIn
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MjgxODY1OTQsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTYyODE4NjU5NCwiZXhwIjoxNjI4MTg3MTk0LCJpZCI6IjIiLCJjbGFzcyI6ImNsaWVudGUiLCJjaGF2ZSI6IklYQzkyLTA1MTZlLWNjMjAxLTA2NTk2In0.hYd2V8yP8ZxuxrTGr8BpEzcG2sFA2tPpx4Mr6yotdmNCi6RgEYb0WZYih9caK0pdDUPNFwcRvrk3HA8mHDrKHQ
-                  expireIn:
-                    type: string
-                    example: 1628187194
+          description: Pedido de entrega realizado com sucesso
         '400':
-          description: Acontece quando uma requisição é efetuada sem enviar o token antigo
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: false
-                  message:
-                    type: string
-                    example: Token não encontrado na request
-                  code: 
-                    type: integer
-                    example: 400
-                  classException:
-                    type: string
-                    example: IXCProvedorPack\\Auth\\JWT\\Exceptions\\JWTException
-  /auth/cliente/alterar-senha:
-    post:
-      summary: Alteração de senha
-      description: Alteração de senha com CNPJ/CPF senha antiga e senha nova
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                senha_antiga:
-                  type: string
-                nova_senha:
-                  type: string
-                confirma_senha:
-                  type: string
-                cnpj_cpf:
-                  type: string
-      responses:
-        '200':
-          summary: Autenticação por Login e Senha
-          description: Retorna um objeto JSON com um objeto com duas propriedades, token e o expireIn
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  mensagem:
-                    type: string
-                    example: Senha atualizada com sucesso!
+          description: Requisição inválida
         '401':
-          description: Acontece quando a senha atual informada na requisição é incorreta.
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: A senha atual não é igual à informada
-                  code: 
-                    type: integer
-                    example: 401
-                  classException:
-                    type: string
-                    example: Exception
-        '400':
-          description: Quando a nova senha e a confirmação não são iguais
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: A nova senha não é igual à senha de confirmação
-                  code: 
-                    type: integer
-                    example: 400
-                  classException:
-                    type: string
-                    example: Exception
-  /auth/cliente/recuperar-senha:
-    post:
-      summary: Recuperação de senha do usuário
-      description: Para recuperar a senha do usuário logado, a rota valida os parâmetros de recuperação de senha configurados e envia por email ou SMS um link para que a senha seja redefinida.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                login:
-                  type: string
-                  example: 000.000.000-00 || teste@email.com
-      responses:
-        '200':
-          summary: Autenticação por Login e Senha
-          description: Retorna um objeto JSON com um objeto com duas propriedades, token e o expireIn
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  mensagem:
-                    type: string
-                    example: Senha atualizada com sucesso!
-        '401':
-          description: Acontece quando a senha atual informada na requisição é incorreta.
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: A senha atual não é igual à informada
-                  code: 
-                    type: integer
-                    example: 401
-                  classException:
-                    type: string
-                    example: Exception
-        '400':
-          description: Quando a nova senha e a confirmação não são iguais
-          content: 
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: A nova senha não é igual à senha de confirmação
-                  code: 
-                    type: integer
-                    example: 400
-                  classException:
-                    type: string
-                    example: Exception
-  /central-api/get-basic-config:
-    get:
-      summary: Informações básicas de configuração da central
-      description: Retorna as configurações necessárias para a montagem da tela de login.
-      responses:
-        '200':
-          summary: Retorna as informações básicas da central
-          description: Retorna um objeto JSON com propriedades tipo_login retorna E = Login por email, C login por CPF, hotsite_logo_base = Logo utilizada na central permitir_cadastros_usuario Indica se permite cadastro de usuários pela central (S = Sim, N = Não) login_campo_texto Texto que deseja apresentar para o usuário da central no campo de login
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  tipo_login:
-                    type: string
-                    example: C
-                  hotsite_logo_base: 
-                    type: string
-                    example: base64
-                  permitir_cadastros_usuario:
-                    type: string
-                    example: S
-                  login_campo_texto:
-                    type: string
-                    example: Por favor insira seu CPF\/CNPJ para prosseguir
-                  conceder_desconto_cartcredito_central:
-                    type: string
-                    example: S
-                  fatura_antecedencia:
-                    type: string
-                    example: 0
-                  fatura_mostrar_apos_vencimento:
-                    type: string
-                    example: 0
-                  fatura_pos_emissao:
-                    type: string
-                    example: 0
-                  carteira_credito_padrao:
-                    type: string
-                    example: 0
-                  speedtest_server:
-                    type: string
-                    example: 0
-                  url:
-                    type: string
-                    example: <host.com.br>
-        '400':
-          summary: Autenticação por Login e Senha
-          description: Retorna um objeto JSON com um objeto com duas propriedades, token e o expireIn
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  tipo_login:
-                    type: string
-                    example: C
-                  hotsite_logo_base: 
-                    type: string
-                    example: base64
-                  permitir_cadastros_usuario:
-                    type: string
-                    example: S
-                  login_campo_texto:
-                    type:
-                    example: Por favor insira seu CPF\/CNPJ para prosseguir
-  /central-api/get-dados-cliente:
-    get:
-      summary: Informações básicas referentes ao cliente
-      description: Retorna diversas informações relacionadas ao cliente logado atualmente na Central API com base no token de autenticação.
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          summary: Retorna as informações básicas da central
-          description: Retorna um objeto JSON com os dados do cliente logado 
-
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: C
-                    description: teste id
-                  ativo: 
-                    type: string
-                    example: base64
-                  fantasia:
-                    type: string
-                    example: S
-                  razao:
-                    type: string
-                    example: Por favor insira seu CPF\/CNPJ para prosseguir
-                  acesso_automatico_central:
-                    type: string
-                    example: S
-                  primeiro_acesso_central:
-                    type: string
-                    example: 0
-                  hotsite_email:
-                    type: string
-                    example: 0
-                  senha:
-                    type: string
-                    example: 0
-                  ie_identidade:
-                    type: string
-                    example: 0
-                  fone:
-                    type: string
-                    example: 0
-                  telefone_celular:
-                    type: string
-                    example: 99 9 9999-9999
-                  telefone_comercial:
-                    type: string
-                    example: 99 9 9999-9999
-                  ramal:
-                    type: string
-                    example: 99 9 9999-9999
-                  cep:
-                    type: string
-                    example: 00.000.000
-                  endereco:
-                    type: string
-                    example: Rua  teste da silva
-                  numero:
-                    type: string
-                    example: 1235
-                  bairro:
-                    type: string
-                    example: Bairro teste
-                  complemento:
-                    type: string
-                    example: D
-                  referencia:
-                    type: string
-                    example: Perto do mercado teste
-        '400':
-          summary: Erro de autenticação
-          description: Retorna um erro de autenticação
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message: 
-                    type: string
-                    example: Token n\u00e3o encontrado na request
-                  code:
-                    type: integer
-                    example: 400
-                  classException:
-                    type: string
-                    example: IXCProvedorPack\\Auth\\JWT\\Exceptions\\JWTException
-  /central-api/get-faturas:
-    get:
-      summary: Faturas listadas na Central do Assinante
-      description: Retorna todas as faturas que deverão ser listadas nas grids da central, respeitando os dados presentes nas configurações gerais.
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: body
-          name: status
-          schema:
-            type: string
-            description: Filtro referente ao status das faturas a serem listadas, como R (Recebidas) ou A (Abertas), por exemplo.
-            enum:
-              - R
-              - A
-      parameters:
-        - in: body
-          name: agrupaPorContrato
-          schema:
-            type: string
-            description: Caso estiver como 'S', irá agrupar as faturas pelo número de contrato (cliente_contrato_id).
-            enum:
-              - S
-              - N
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                status:
-                  type: string
-                  example: R(Recebidas) || A(Abertas)
-                agrupaPorContrato:
-                  type: string
-      responses:
-        '200':
-          summary: Retorna as informações básicas da central
-          description: Retorna um objeto JSON com os dados do cliente logado 
-
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  fn_areceber_id:
-                    type: string
-                    example: 152328
-                  fn_areceber_status: 
-                    type: string
-                    example: R
-                  fn_areceber_obs:
-                    type: string
-                    example: de 10/09/2021 até 09/10/2021
-                  fn_areceber_data_vencimento:
-                    type: string
-                    example: 2021-09-10
-                  fn_areceber_valor_ate_vencimento:
-                    type: string
-                    example: 580.00
-                  fn_areceber_valor_aberto:
-                    type: string
-                    example: 0.00
-                  fn_areceber_aguardando_confirmacao_pagamento:
-                    type: string
-                    example: N
-                  fn_areceber_tipo_recebimento:
-                    type: string
-                    example: Boleto
-                  fn_areceber_id_carteira_cobranca:
-                    type: string
-                    example: 1
-                  fn_areceber_linha_digitavel:
-                    type: string
-                    example: ''
-                  fn_areceber_valor_desconto_ate_vencimento:
-                    type: string
-                    example: 580,00
-                  fn_areceber_gateway_link:
-                    type: string
-                    example: ''
-                  fn_areceber_titulo_importado:
-                    type: string
-                    example: N
-                  fn_areceber_numero_parcela_recorrente:
-                    type: string
-                    example: 2
-                  fn_areceber_parcela_proporcional:
-                    type: string
-                    example: N
-                  cliente_contrato_id:
-                    type: string
-                    example: 473
-                  cliente_contrato_contrato:
-                    type: string
-                    example: Plano velocidade TESTE
-                  fn_carteira_cobranca_permite_atualizar_boleto_apos_data_ixc:
-                    type: string
-                    example: N
-                  fn_carteira_cobranca_tipo_recebimento:
-                    type: string
-                    example: Boleto
-                  fn_carteira_cobranca_classe_funcoes:
-                    type: string
-                    example: funcoes_carne
-                  fn_carteira_cobranca_gateway_nome:
-                    type: string
-                    example: ''
-                  fn_carteira_cobranca_carteira:
-                    type: string
-                    example: 10
-                  fn_carteira_cobranca_desconto_proporcional:
-                    type: string
-                    example: S
-                  fn_carteira_cobranca_desconto_v:
-                    type: string
-                    example: 0.00
-                  fn_carteira_cobranca_desconto_p:
-                    type: string
-                    example: 0.00
-                  moeda:
-                    type: string
-                    example: R$
-        '400':
-          summary: Erro de autenticação
-          description: Retorna um erro de autenticação
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    example: []
-                  count: 
-                    type: string
-                    example: 0
-  /central-api/alterar-carteira-boleto:
-    get:
-      summary: Alteração da carteira de cobrança de um boleto
-      description: Realiza a alteração da carteira de cobrança de um determinado boleto.
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: 
-                status:
-                  type: string
-                  example: R(Recebidas) || A(Abertas)
-                agrupaPorContrato:
-                  type: string
-      responses:
-        '200':
-          summary: Retorna as informações básicas da central
-          description: Retorna um objeto JSON com os dados do cliente logado 
-
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  fn_areceber_id:
-                    type: string
-                    example: 152328
-                  fn_areceber_status: 
-                    type: string
-                    example: R
-                  fn_areceber_obs:
-                    type: string
-                    example: de 10/09/2021 até 09/10/2021
-                  fn_areceber_data_vencimento:
-                    type: string
-                    example: 2021-09-10
-                  fn_areceber_valor_ate_vencimento:
-                    type: string
-                    example: 580.00
-                  fn_areceber_valor_aberto:
-                    type: string
-                    example: 0.00
-                  fn_areceber_aguardando_confirmacao_pagamento:
-                    type: string
-                    example: N
-                  fn_areceber_tipo_recebimento:
-                    type: string
-                    example: Boleto
-                  fn_areceber_id_carteira_cobranca:
-                    type: string
-                    example: 1
-                  fn_areceber_linha_digitavel:
-                    type: string
-                    example: ''
-                  fn_areceber_valor_desconto_ate_vencimento:
-                    type: string
-                    example: 580,00
-                  fn_areceber_gateway_link:
-                    type: string
-                    example: ''
-                  fn_areceber_titulo_importado:
-                    type: string
-                    example: N
-                  fn_areceber_numero_parcela_recorrente:
-                    type: string
-                    example: 2
-                  fn_areceber_parcela_proporcional:
-                    type: string
-                    example: N
-                  cliente_contrato_id:
-                    type: string
-                    example: 473
-                  cliente_contrato_contrato:
-                    type: string
-                    example: Plano velocidade TESTE
-                  fn_carteira_cobranca_permite_atualizar_boleto_apos_data_ixc:
-                    type: string
-                    example: N
-                  fn_carteira_cobranca_tipo_recebimento:
-                    type: string
-                    example: Boleto
-                  fn_carteira_cobranca_classe_funcoes:
-                    type: string
-                    example: funcoes_carne
-                  fn_carteira_cobranca_gateway_nome:
-                    type: string
-                    example: ''
-                  fn_carteira_cobranca_carteira:
-                    type: string
-                    example: 10
-                  fn_carteira_cobranca_desconto_proporcional:
-                    type: string
-                    example: S
-                  fn_carteira_cobranca_desconto_v:
-                    type: string
-                    example: 0.00
-                  fn_carteira_cobranca_desconto_p:
-                    type: string
-                    example: 0.00
-                  moeda:
-                    type: string
-                    example: R$
-        '400':
-          summary: Erro de autenticação
-          description: Retorna um erro de autenticação
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    example: []
-                  count: 
-                    type: string
-                    example: 0
+          description: Não autorizado
 
 
-components:
-  securitySchemes:
-    bearerAuth:  
-      type: http
-      scheme: bearer
-      bearerFormat: JWT  
-  responses:
-    UnauthorizedError:
-      description: Token de acesso perdido ou inválido
+

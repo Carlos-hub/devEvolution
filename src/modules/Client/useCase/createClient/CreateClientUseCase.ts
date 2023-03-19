@@ -19,7 +19,7 @@ export class CreateClientUseCase{
       return new Error("Invalid Email")
      }
      const existEmail = await Client.findOne({email: email})
-     console.log(existEmail?.email);
+    //  console.log(existEmail?.email);
      const hashPassword = await hash(password,10)
      if(existEmail?.email){
       throw new Error("Invalid Email already in use")
@@ -36,7 +36,7 @@ export class CreateClientUseCase{
          orderHistory,
          avatar
         });
-        newClient.save()
+        await newClient.save()
         .then(() => {return "Cliente criado com sucesso"} )
         .catch((err) => console.log(err))
         return existEmail?.email;

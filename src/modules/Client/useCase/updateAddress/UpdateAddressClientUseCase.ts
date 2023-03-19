@@ -22,11 +22,6 @@ export class UpdateAddressClientUseCase{
 
   async execute(id:string,address:object){
     try {
-      // const client = await Client.findById<any>(id);
-      // if (!client) {
-      //   console.log('Cliente não encontrado.');
-      //   return null;
-      // }
       const client =  await Client.findOneAndUpdate({_id: id}, {$push: {endereco: address}}, {new: true})
       .then(user => {
         console.log(user);
@@ -34,6 +29,7 @@ export class UpdateAddressClientUseCase{
       .catch(err => {
         console.log(err);
       });
+      return await client;
     } catch (err) {
       console.log(err);
       return null;
