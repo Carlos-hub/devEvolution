@@ -543,8 +543,183 @@ paths:
           description: Mostra todos os pedidos feitos
         '401':
           description: Unauthorized
-
-
+  /product/create:
+    post:
+      tags:
+        - Product
+      summary: Cria um novo produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Pizza 5 queijos"
+                price:
+                  type: number
+                  example: 125.00
+                status:
+                  type: string
+                  example: "available"
+                description:
+                  type: string
+                  example: "Pizza com queijo gorgonzola, mussarela, cheddar"
+              required:
+                - name
+                - price
+                - status
+                - description
+      responses:
+        '200':
+          description: Produto criado com sucesso
+        '400':
+          description: Erro ao criar produto
+        '401':
+          description: Não autorizado
+  /product/update/{id}:
+    put:
+      tags:
+        - Product
+      summary: Update a produto by ID
+      description: Atualizar Produtos pelo Id passado na requisição
+      parameters:
+        - in: path
+          name: id
+          description: Id do produto a ser atualizado
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Object containing updated product information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the product
+                price:
+                  type: number
+                  format: double
+                  description: Price of the product
+                status:
+                  type: string
+                  description: Status of the product
+                  enum: [available, unavailable]
+                description:
+                  type: string
+                  description: Description of the product
+              example:
+                name: "Pizza 5 queijos"
+                price: 95.00
+                status: "available"
+                description: "Pizza com queijo gorgonzola, mussarela, cheddar e outros"
+      responses:
+        200:
+          description: Produto updated sucesso
+        400:
+          description: Invalid input, object invalid
+        404:
+          description: Product not found
+        500:
+          description: Internal server error
+  /product/show/{id}:
+    get:
+      tags:
+        - Product
+      summary: Exibe os detalhes de um produto específico
+      description: Retorna as informações detalhadas de um produto, como nome, preço, descrição e status.
+      parameters:
+        - in: path
+          name: id
+          description: ID do produto que deseja visualizar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Produto encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID do produto
+                  name:
+                    type: string
+                    description: Nome do produto
+                  price:
+                    type: number
+                    description: Preço do produto
+                  status:
+                    type: string
+                    description: Status do produto
+                  description:
+                    type: string
+                    description: Descrição do produto
+        '404':
+          description: Produto não encontrado
+  /product/delete/{id}:
+    delete:
+      tags:
+        - Product
+      summary: Deletar um produto
+      description: Deleta um produto específico pelo ID.
+      parameters:
+        - in: path
+          name: id
+          description: ID do produto a ser deletado.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Produto deletado com sucesso.
+        '404':
+          description: Produto não encontrado.
+        '500':
+          description: Erro interno do servidor.
+  /user/show:
+    get:
+      tags:
+        - User
+      summary: Mostra os detalhes do usuário logado
+      description: Retorna as informações do usuário autenticado
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Nome do usuário
+                  age:
+                    type: integer
+                    description: Idade do usuário
+                  cpf:
+                    type: string
+                    description: CPF do usuário
+                  email:
+                    type: string
+                    description: Endereço de e-mail do usuário
+                example:
+                  name: Fulano de Tal
+                  age: 30
+                  cpf: 123.456.789-00
+                  email: fulano@example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+        - bearerAuth: []
 
 
 
