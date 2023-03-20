@@ -6,8 +6,9 @@ export class DeleteClientAddressUseCase{
     try {
      const result = await Client.updateOne(
        { _id: userId },
-       { $pull: { address: { _id: idRemove } } }
-     );
+       { $pull: { endereco: { _id: idRemove } } }
+     ).then(resultado =>{console.log(resultado)})
+     .catch(err =>{ console.log(err)})
      console.log(result);
      return result;
    } catch (err) {

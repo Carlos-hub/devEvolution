@@ -7,13 +7,15 @@ import { AuthenticateClientController } from "../modules/Client/useCase/authenti
 import { UpdateAddressController } from "../modules/Client/useCase/updateAddress/updateAddressClienteController";
 import { isAuthenticate } from "../middleware/isAuthenticate";
 import { ShowDeliveryClientController } from "../modules/Delivery/useCase/showDeliveryClient/showDeliveryController";
+import { DeleteClientAddressController } from "../modules/Client/useCase/deleteAddress/deleteClientAddressController";
 
 const createClientController = new CreateClientController();
 const editClientController = new EditClientController();
 const showClientController = new ShowClientController();
 const deleteClientController = new DeleteClientController();
 const updateAddres = new UpdateAddressController();
-const updateAddress = new UpdateAddressController()
+const updateAddress = new UpdateAddressController();
+const deleteClientAddress = new DeleteClientAddressController();
 const clientRoutes = express.Router();
 const authClient = new AuthenticateClientController();
 const showDeliveryClient = new ShowDeliveryClientController();
@@ -21,13 +23,13 @@ const showDeliveryClient = new ShowDeliveryClientController();
 clientRoutes.get('/',(request:Request,response:Response) =>{
  response.json("All Right baby")
 })
-clientRoutes.put('/edit/',isAuthenticate,editClientController.handle);
 clientRoutes.post('/create',createClientController.handle);
-clientRoutes.get('/show',isAuthenticate,showClientController.handle);
-clientRoutes.delete('/delete/:id',isAuthenticate,deleteClientController.handle)
 clientRoutes.post('/auth',authClient.handle);
+clientRoutes.put('/edit/',isAuthenticate,editClientController.handle);
+clientRoutes.get('/show',isAuthenticate,showClientController.handle);
+clientRoutes.delete('/delete/:id',isAuthenticate,deleteClientController.handle);
 clientRoutes.post('/address',updateAddres.handle)
-clientRoutes.get('/address/delete/:id',updateAddress.handle)
+clientRoutes.delete('/address/delete/:id',deleteClientAddress.handle)
 clientRoutes.get('/delivery', showDeliveryClient.handle)
 
 

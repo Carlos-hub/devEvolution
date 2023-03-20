@@ -7,7 +7,6 @@ export class AuthenticateClientUseCase{
   //  console.log(exist)
 
    if(!exist){
-    console.log("caiu aqui")
      throw new Error("Erro Usuário não encontrado")
    }
    const clientOk = await compare(senha, exist?.password ?? "");
