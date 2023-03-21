@@ -264,30 +264,29 @@ paths:
       summary: Cria um novo endereço para o cliente atual
       security:
         - JWT: []
-      parameters: []
-      requestBody:
-        description: Objeto JSON contendo os dados do endereço
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                street:
-                  type: string
-                  example: Getulio Vargas
-                houseNumber:
-                  type: string
-                  example: 22
-                city:
-                  type: string
-                  example: chapeco
-                district:
-                  type: string
-                  example: Centro
-                landmark:
-                  type: string
-                  example: casa branca
+      parameters:
+        - in: body
+          name: body
+          description: Informações do delivery a ser criado
+          required: true
+          schema:
+            type: object
+            properties:
+              street:
+                type: string
+                example: "General Osório"
+              houseNumber:
+                type: string
+                example: "22"
+              city:
+                type: string
+                example: "Chapecó"
+              district:
+                type: string
+                example: "Centro"
+              landmark:
+                type: string
+                exasmple: "casa preta"
               required:
                 - street
                 - houseNumber
@@ -509,22 +508,20 @@ paths:
         - Delivery
       security:
         - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                deliveryAddress:
-                  type: string
-                product:
-                  type: array
-                  items:
-                    type: string
-              required:
-                - deliveryAddress
-                - product
+      parameters:
+        - in: body
+          name: body
+          description: Informações do delivery a ser criado
+          required: true
+          schema:
+            type: object
+            properties:
+              deliveryAddress:
+                type: string
+                example: 6418e42c82a948e3869bbad9
+              product:
+                type: array
+                example: ["6413ba4addc4133ed6059a88","6413ba4addc4133ed6059a83"]
       responses:
         '200':
           description: Entrega criada com sucesso
@@ -550,29 +547,28 @@ paths:
       tags:
         - Product
       summary: Cria um novo produto
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: "Pizza 5 queijos"
-                price:
-                  type: number
-                  example: 125.00
-                status:
-                  type: string
-                  example: "available"
-                description:
-                  type: string
-                  example: "Pizza com queijo gorgonzola, mussarela, cheddar"
-              required:
-                - name
-                - price
-                - status
-                - description
+      parameters:
+        - in: body
+          name: body
+          description: Informações do cliente a ser criado
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Pizza de File ao molho conhaque"
+              price:
+                type: number
+                example: "125.00"
+              status:
+                type: string
+                example: "available"
+              description:
+                type: string
+                example: "massa de Pizza de filé ao molho conhaque"
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Produto criado com sucesso
@@ -591,35 +587,27 @@ paths:
           name: id
           description: Id do produto a ser atualizado
           required: true
+        - in: body
+          name: body
+          description: Informações do cliente a ser criado
+          required: true
           schema:
-            type: string
-      requestBody:
-        description: Object containing updated product information
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Name of the product
-                price:
-                  type: number
-                  format: double
-                  description: Price of the product
-                status:
-                  type: string
-                  description: Status of the product
-                  enum: [available, unavailable]
-                description:
-                  type: string
-                  description: Description of the product
-              example:
-                name: "Pizza 5 queijos"
-                price: 95.00
-                status: "available"
-                description: "Pizza com queijo gorgonzola, mussarela, cheddar e outros"
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Pizza de File ao molho conhaque"
+              price:
+                type: number
+                example: "125.00"
+              status:
+                type: string
+                example: "available"
+              description:
+                type: string
+                example: "massa de Pizza de filé ao molho conhaque"
+      security:
+        - BearerAuth: []
       responses:
         200:
           description: Produto updated sucesso
@@ -642,6 +630,8 @@ paths:
           required: true
           schema:
             type: string
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Produto encontrado com sucesso
@@ -680,6 +670,8 @@ paths:
           required: true
           schema:
             type: string
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Produto deletado com sucesso.
@@ -693,6 +685,8 @@ paths:
         - User
       summary: Mostra os detalhes do usuário logado
       description: Retorna as informações do usuário autenticado
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Usuário encontrado
