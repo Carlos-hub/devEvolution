@@ -1,5 +1,13 @@
 # devEvolution
 
+##### Todas as Rotas estão documentadas com swagger
+
+para acessá-las é necessário apenas ter acessar a rota /api-docs
+
+
+
+
+
 ### Criar uma API de produto/pedido 
 ###################
 ### Produto
