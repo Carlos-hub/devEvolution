@@ -92,7 +92,7 @@ paths:
               email:
                 type: string
                 example: teste@teste.com
-              password:
+              senha:
                 type: string
                 example: senhacriptografada
       responses:
