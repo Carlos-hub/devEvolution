@@ -1,0 +1,782 @@
+_type: export
+__export_format: 4
+__export_date: 2023-03-22T02:04:27.097Z
+__export_source: insomnia.desktop.app:v2022.2.1
+resources:
+  - _id: req_12849794367b4d3883aee10b738b97b6
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679438665486
+    created: 1678901038204
+    url: "{{ _.baseURL }}/client/address"
+    name: Update Address V
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+         "street":"Gerenal brasolio" ,
+         "houseNumber":"22",
+         "city":"chapeco",
+         "district":"centro",
+         "landmark":"casa preta"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_91ddaae0c14944a2862aa3432af9395e
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTM1MzE2NiwiZXhwIjoxNjc5NDM5NTY2LCJzdWIiOiI2NDE3ODczMGRjNWY5M2UzM2MxZWJhNmQifQ.XrPVSTo_UwUiGV2uQx75Oa27jTHvX8HAp-81_RlmhFc
+    metaSortKey: -1678901038204
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_16c39278ed3d4fd28b8e33688769e9ea
+    parentId: wrk_77c6563220b444148cbd71d465d1a276
+    modified: 1679450322223
+    created: 1678647552885
+    name: Projeto Dev Evolution
+    description: ""
+    environment: {}
+    environmentPropertyOrder: {}
+    metaSortKey: -1678647552885
+    _type: request_group
+  - _id: wrk_77c6563220b444148cbd71d465d1a276
+    parentId: null
+    modified: 1650737868678
+    created: 1650737868678
+    name: New Document
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_cbf7eb34544d4809be7974435276e61c
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679352851878
+    created: 1678674324169
+    url: "{{ _.baseURL }}/client/show"
+    name: Client Show V
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTM1MjgzOSwiZXhwIjoxNjc5NDM5MjM5LCJzdWIiOiI2NDE3ODczMGRjNWY5M2UzM2MxZWJhNmQifQ.OhuyZRwnk1OsLFe9wSUVq4T396SRXCsDw7ETtoZFt4o
+      disabled: false
+    metaSortKey: -1678647561388
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7da9340f5b364b599c92e75c0c313359
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679269554656
+    created: 1679269450380
+    url: "{{ _.baseURL }}/user/show"
+    name: User Show V
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVjYXVzZXJAbWlndWVsLmNvbSIsImlhdCI6MTY3OTI2OTUzOCwiZXhwIjoxNjc5MzU1OTM4LCJzdWIiOiI2NDE3OGYwMTFiZDk3NmY5NzRlOWNjOTUifQ.dP73oq3x1XcPbPvVvwU2HzXAiRov-tCtrZ4LoP7s5Xc
+      disabled: false
+    metaSortKey: -1678647561386.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bfb112bf91eb496d8cf3b4ca69e419ef
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679244138507
+    created: 1679244073040
+    url: "{{ _.baseURL }}/delivery/showall"
+    name: Get All Delivery
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVpdGFub3plc0BtaWd1ZWwuY29tIiwiaWF0IjoxNjc4OTAxMjEzLCJleHAiOjE2Nzg5ODc2MTMsInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.ztspQ-DKhk15tcuF8AAaZvvMpD92BEFW1jshARaXjVo
+      disabled: false
+    metaSortKey: -1678647561384.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8ba7038505324068b8133feae0bcdf31
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1678911432278
+    created: 1678907973879
+    url: "{{ _.baseURL }}/client/address/delete/64120cd98117b996939c6111"
+    name: Client address delete
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVpdGFub3plc0BtaWd1ZWwuY29tIiwiaWF0IjoxNjc4OTA3OTk2LCJleHAiOjE2Nzg5OTQzOTYsInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.jHgaXZFhugDL_t0S30C-KSLy_o5rM2DwhoTeJ9w-Ql
+      disabled: false
+    metaSortKey: -1678647561381.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_be355c047d244db68a08318991bed827
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1678792534985
+    created: 1678757287017
+    url: "{{ _.baseURL }}/product/show/640fcafb0a4b0aaff3366ee6"
+    name: Get Product
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_9faa757f96824d7ca0542716d900e4fb
+        name: id
+        value: 640e3d8543ba68fdf5bd3b39
+        description: ""
+    authentication: {}
+    metaSortKey: -1678647561375.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2d26a55ad4ef407d9b4f0e98960de1c7
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679010411843
+    created: 1678794076042
+    url: "{{ _.baseURL }}/product/show/"
+    name: Get Product ALL
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_9faa757f96824d7ca0542716d900e4fb
+        name: id
+        value: 640e3d8543ba68fdf5bd3b39
+        description: ""
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVpdGFub3plc0BtaWd1ZWwuY29tIiwiaWF0IjoxNjc5MDA5MzE5LCJleHAiOjE2NzkwOTU3MTksInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.LsaFj8X_Vn4xOVtJgyPJ0cLPstdJBOEw6BvFdE_WwYY
+    metaSortKey: -1678647561369.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5f33c2efac5246b496ce099364058ef7
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679353129123
+    created: 1679009296580
+    url: "{{ _.baseURL }}/client/delivery"
+    name: Get Delivery ALL V
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_9faa757f96824d7ca0542716d900e4fb
+        name: id
+        value: 640e3d8543ba68fdf5bd3b39
+        description: ""
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTI0MjU5NSwiZXhwIjoxNjc5MzI4OTk1LCJzdWIiOiI2NDE2ZWI0ZGI4NmExNzY2NDVmMmUzMzQifQ.An8A1HRWTteS10dRAJzsvdBYdJ3-rHhohRvyJFnULFE
+    metaSortKey: -1678647561366.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d8cd57c9fe794889b2191ffce3667ecc
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679438404806
+    created: 1679353947263
+    url: "{{ _.baseURL }}/delivery/get/status"
+    name: Get Delivery ALL aggregate
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status":"cancelado"
+        }
+    parameters: []
+    headers:
+      - id: pair_9faa757f96824d7ca0542716d900e4fb
+        name: id
+        value: 640e3d8543ba68fdf5bd3b39
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_05e2485b994d4e3cbc47ce405fc66173
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTI0MjU5NSwiZXhwIjoxNjc5MzI4OTk1LCJzdWIiOiI2NDE2ZWI0ZGI4NmExNzY2NDVmMmUzMzQifQ.An8A1HRWTteS10dRAJzsvdBYdJ3-rHhohRvyJFnULFE
+    metaSortKey: -1678647561364.5625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2b7dda70afd64b1ea6f1ae9f3554c40b
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679268388236
+    created: 1678743054330
+    url: "{{ _.baseURL }}/client/delete/640f938279202aba706f5acf"
+    name: delete Client V
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1678647561363
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fa1935f6f72a4f458994da1a31386021
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679268524875
+    created: 1679265088022
+    url: "{{ _.baseURL }}/user/delete"
+    name: delete User V
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzdXNlckBtaWd1ZWwuY29tIiwiaWF0IjoxNjc5MjY1Mjk0LCJleHAiOjE2NzkzNTE2OTQsInN1YiI6IjY0MTc4ZGY1MWJkOTc2Zjk3NGU5Y2M4ZiJ9.nxxn4jlLIfraaAoMBWReSa1v81yjo67YrBoNhBJOg34
+    metaSortKey: -1678647561359.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3d59d6fe9f154d67bf83eea09d2820ff
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679356253368
+    created: 1679248481597
+    url: "{{ _.baseURL }}/client/address/delete/6418e42c82a948e3869bbad9"
+    name: delete Client address V
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTM1NjI0NiwiZXhwIjoxNjc5NDQyNjQ2LCJzdWIiOiI2NDE3ODczMGRjNWY5M2UzM2MxZWJhNmQifQ.lAfGwdGZDhvnAx9HpjSZUo-E72PuMtX6EmuyLOC2LkA
+    metaSortKey: -1678647561356.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_37eb759eaa0945eba9c06dc59ad6b55e
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679014437340
+    created: 1678756474456
+    url: "{{ _.baseURL }}/product/delete/6413b8caeda47dfccc052a9b"
+    name: delete Product
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVpdGFub3plc0BtaWd1ZWwuY29tIiwiaWF0IjoxNjc5MDEzOTY3LCJleHAiOjE2NzkxMDAzNjcsInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.5IIcIRwXAsjf7qlDCqYUlJ60oIBKL8yjcYVg9DqcvPw
+    metaSortKey: -1678647561350.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ddeff6b71e0c434fab4a2fb7961db48b
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679355610801
+    created: 1678647561338
+    url: "{{ _.baseURL }}/client/create"
+    name: Create Client V
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Xurumino",
+        	"age": 22,
+        	"cpf": "23452345",
+        	"adress": {},
+        	"paymentMethod": {},
+        	"email": "carlos@carlos.com",
+        	"password": "Xurumino",
+        	"bornDate": "2000-10-30T00:00:00.000Z"
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1678647561338
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_efd7ec68d2bc4a56bdee60b2d4e43b68
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679269525442
+    created: 1679141534689
+    url: "{{ _.baseURL }}/user/create"
+    name: Create User V
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Lucas usuario",
+        	"age": 18,
+        	"cpf": "949812876314",
+        	"email": "ucauser@miguel.com",
+        	"password": "eulara",
+        	"phone":"99 9 9999-9999"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1678498983838.7188
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_52d3e1ce0d674aeebb9733e0ee2efe1b
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679438408131
+    created: 1678986023986
+    url: "{{ _.baseURL }}/delivery/create"
+    name: Create delivery
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"deliveryAddress":"6418e42c82a948e3869bbad9",
+        	"product":["6413ba4addc4133ed6059a88","6413ba4addc4133ed6059a83","6413ba4addc4133ed6059a83"]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ilh1cnVtaW5vQFh1cnVtaW5vLmNvbSIsImlhdCI6MTY3OTM1MzE2NiwiZXhwIjoxNjc5NDM5NTY2LCJzdWIiOiI2NDE3ODczMGRjNWY5M2UzM2MxZWJhNmQifQ.XrPVSTo_UwUiGV2uQx75Oa27jTHvX8HAp-81_RlmhFc
+    metaSortKey: -1678350406339.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d373e8fd1c7141e7b0939e2adb965c99
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679450098202
+    created: 1678815404735
+    url: "{{ _.baseURL }}/client/auth"
+    name: Authenticate Client V
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: "{
+
+        \t\"email\": \"Xurumino@Xurumino.com\",
+
+        \t\"senha\": \"Xurumino\"
+
+        }
+
+        \t"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1678053251340.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ebdd6d08f27e49dc8db055708e0b1e7e
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679352554117
+    created: 1679264838525
+    url: "{{ _.baseURL }}/user/auth"
+    name: Authenticate USer
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: "{
+
+        \t\"email\": \"ucauser@miguel.com\",
+
+        \t\"senha\": \"eulara\"
+
+        }
+
+        \t"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1677756096342.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7746a3de1e724c9ab2eb5e92323d91e6
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679270218946
+    created: 1678753557721
+    url: "{{ _.baseURL }}/product/update/640fbfca0bf3415352e8a8f6"
+    name: Edit Product
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Pizza de calabresa",
+        	"price": 22,
+        	"status": "unavailable",
+        	"description":"era Pizza de calabresa não vai massa e calabresa"
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1677458941343.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: false
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: false
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a68a5639cfb54aeb8054227365c9591a
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679438894029
+    created: 1678756575124
+    url: "{{ _.baseURL }}/product/create"
+    name: Create Product
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Pizza de File ao molho conhaque",
+        	"price": "125.00",
+        	"status": "available",
+        	"description":"era Pizza de filé ao molho conhaque"
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication: {}
+    metaSortKey: -1676864631346.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: false
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: false
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2a5171085bec4e37b0524f978ac57035
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679014089191
+    created: 1678834390609
+    url: "{{ _.baseURL }}/product/createmany"
+    name: Create Many Product
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVpdGFub3plc0BtaWd1ZWwuY29tIiwiaWF0IjoxNjc5MDEzOTY3LCJleHAiOjE2NzkxMDAzNjcsInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.5IIcIRwXAsjf7qlDCqYUlJ60oIBKL8yjcYVg9DqcvPw
+    metaSortKey: -1676567476348.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: false
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: false
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_028d7abb560c443b918a98353e5c745f
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679450141782
+    created: 1678652814627
+    url: "{{ _.baseURL }}/client/edit/"
+    name: Edit Client V
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	 "name":"Carlos",
+           "age":78,
+        	 "cpf":"667788891",
+           "adress":[{
+        		 "street":"Marcos Trombeta",
+        		 "houseNumber":"22",
+        		 "city":"Chapecó",
+        		 "district":"Santo antonio",
+        		 "landMark":"Casa de portão branco"
+        	 }],
+           "paymentMethod":[],
+           "email":"eitanozes@miguel.com",
+           "password":"lara",
+           "bornDate":"1900-10-30T00:00:00.000Z",
+           "orderHistory":{},
+           "avatar":"32"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV1c291bGFyYUBtaWd1ZWwuY29tIiwiaWF0IjoxNjc4ODM5MTQyLCJleHAiOjE2Nzg5MjU1NDIsInN1YiI6IjY0MTEwZDVkMjRjOGZhNTBjYjQ1ZmUxMSJ9.lRc7hTaT2Ryap8iObrdEMiW9sqIjRpMVYxVqbHUnKU8
+    metaSortKey: -1676270321349.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_72192fff59a94b47bc92d8db0be5f226
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679354185713
+    created: 1679350992034
+    url: "{{ _.baseURL }}/delivery/update/6418e592c8c3a62cdcfd906c"
+    name: Update Delivery
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	 "status":"cancelado"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVjYXVzZXJAbWlndWVsLmNvbSIsImlhdCI6MTY3OTM1MTA3NSwiZXhwIjoxNjc5NDM3NDc1LCJzdWIiOiI2NDE3OGYwMTFiZDk3NmY5NzRlOWNjOTUifQ.95Wt4KGiJjhhlbzJOXqgP_vnJKcQERHbVs7tgf9PTGM
+    metaSortKey: -1675676011352.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fcaae06d87b84747bf1570053506f98f
+    parentId: fld_16c39278ed3d4fd28b8e33688769e9ea
+    modified: 1679268511425
+    created: 1679264801940
+    url: "{{ _.baseURL }}/user/edit/"
+    name: Edit User V
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	 "name":"Lucas de Lara",
+           "age":78,
+        	 "cpf":"667788891",
+           "email":"eitanozes@miguel.com",
+           "password":"lara",
+           "bornDate":"1900-10-30T00:00:00.000Z",
+           "phone":"99 9 9999 9999"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_29d58f20abdf4be393cd9693215d84d7
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2FzdXNlckBtaWd1ZWwuY29tIiwiaWF0IjoxNjc5MjY0ODk0LCJleHAiOjE2NzkzNTEyOTQsInN1YiI6IjY0MTViMGQzMjAwZWRlOTI4Y2UzNjJkMiJ9.qxHL4GS-Zwp3Sctkmwoy0PHCnpH3q2g06EiwMT6P4wE
+    metaSortKey: -1675081701355.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_c5d4cb6cb35cd1bbd58361f1276990b182896eb7
+    parentId: wrk_77c6563220b444148cbd71d465d1a276
+    modified: 1678648031977
+    created: 1650737868699
+    name: Base Environment
+    data:
+      baseURL: http://localhost:5000
+      dockerURL: http://172.18.0.2:3333
+    dataPropertyOrder:
+      "&":
+        - baseURL
+        - dockerURL
+    color: null
+    isPrivate: false
+    metaSortKey: 1650737868699
+    _type: environment
+  - _id: jar_c5d4cb6cb35cd1bbd58361f1276990b182896eb7
+    parentId: wrk_77c6563220b444148cbd71d465d1a276
+    modified: 1663117555784
+    created: 1650737868704
+    name: Default Jar
+    cookies:
+      - key: Path
+        value: /
+        domain: hotsite.ixcsoft.com.br
+        path: /api-module/auth/cliente
+        secure: true
+        httpOnly: true
+        hostOnly: true
+        pathIsDefault: true
+        creation: 2022-09-14T01:05:55.781Z
+        lastAccessed: 2022-09-14T01:05:55.781Z
+        id: "3040277464117176"
+    _type: cookie_jar
+  - _id: spc_1f1a0dc6d8944dbcb2c61b1ca2510e96
+    parentId: wrk_77c6563220b444148cbd71d465d1a276
+    modified: 1679438398694
+    created: 1650737868692
+    fileName: New Document
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_698298a830ec42d68428715f185836b5
+    parentId: wrk_77c6563220b444148cbd71d465d1a276
+    modified: 1650737868711
+    created: 1650737868711
+    name: Example Test Suite
+    _type: unit_test_suite

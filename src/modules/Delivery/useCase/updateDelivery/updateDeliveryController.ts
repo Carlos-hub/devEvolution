@@ -11,7 +11,7 @@ export class UpdateDeliveryController{
     // console.log(id,status);
     const updated = await updateDelivery.execute(id,status);
 
-   return response.status(200).json(updated);
+   return response.status(200).json("ok");
    }catch(err){
     return response.status(400).json(err)
    }
