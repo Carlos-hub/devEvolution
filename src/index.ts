@@ -10,6 +10,11 @@ const app = express();
 connectMongo();
 const swaggerDoc = YAML.load('./swagger.yaml')
 
+
+app.use(cors({
+ origin:['http://191.240.128.110']
+}))
+
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
@@ -18,6 +23,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Routes
 import { indexRoutes } from './routes/index.routes';
+import cors from 'cors';
 
 
 app.use('/',indexRoutes);
