@@ -12,7 +12,7 @@ const swaggerDoc = YAML.load('./swagger.yaml')
 
 
 app.use(cors({
- origin:['http://191.240.128.110']
+ origin:['http://191.240.128.110', 'http://localhost:5173','*']
 }))
 
 app.use(express.json({ limit: '10mb' }))
