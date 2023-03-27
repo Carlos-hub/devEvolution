@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs'
 import { connectMongo } from './database/connection';
 require('express-async-errors')
-
+import cors from 'cors';
 const app = express();
 connectMongo();
 const swaggerDoc = YAML.load('./swagger.yaml')
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Routes
 import { indexRoutes } from './routes/index.routes';
-import cors from 'cors';
+
 
 
 app.use('/',indexRoutes);
